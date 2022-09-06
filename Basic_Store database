@@ -1,0 +1,23 @@
+CREATE TABLE Basic_Store (id INTEGER PRIMARY KEY, item TEXT, cost INTEGER, price INTEGER, aisle INTEGER);
+
+INSERT INTO Basic_Store VALUES (1, "Denim Shorts", 10, 50, 1);
+INSERT INTO Basic_Store VALUES (2, "Linen Dress", 7.75, 38, 4);
+INSERT INTO Basic_Store VALUES (3, "Slip Dress", 11.20, 59, 4);
+INSERT INTO Basic_Store VALUES (4, "Puff Jacket", 32, 99, 5);
+INSERT INTO Basic_Store VALUES (5, "Vegan Leather Pants", 28, 89, 6);
+INSERT INTO Basic_Store VALUES (6, "Tank Bodysuit", 10, 48, 2);
+INSERT INTO Basic_Store VALUES (7, "Lace Shirt", 8.42, 39, 2);
+INSERT INTO Basic_Store VALUES (8, "Sweatpants", 7.54, 45, 3);
+INSERT INTO Basic_Store VALUES (9, "Sweatshirt", 7.42, 45, 3);
+INSERT INTO Basic_Store VALUES (10, "Ankle Socks", 1.29, 15, 6);
+INSERT INTO Basic_Store VALUES (11, "Seamless Underwear", 2.15, 18, 6);
+INSERT INTO Basic_Store VALUES (12, "Work Jacket", 22, 78, 5);
+INSERT INTO Basic_Store VALUES (13, "Merino Wool Sweater", 43, 129, 6);
+INSERT INTO Basic_Store VALUES (14, "Maxi Dress", 13, 68, 4);
+INSERT INTO Basic_Store VALUES (15, "Straight Leg Jeans", 33, 99, 1);
+
+--displayed database ordered by price
+SELECT * FROM Basic_Store ORDER BY price;
+
+--displayed cost of most expensive item
+SELECT MAX(price) AS most_expensive FROM Basic_Store;
