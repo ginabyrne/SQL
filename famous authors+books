@@ -1,0 +1,36 @@
+CREATE TABLE authors (id INTEGER PRIMARY KEY, fullname TEXT, hometown TEXT, age INTEGER);
+
+INSERT INTO authors VALUES (1, "Sarah J. Maas", "Manhattan", 36);
+INSERT INTO authors VALUES (2, "J.K. Rowling", "Yate", 57);
+INSERT INTO authors VALUES (3, "Holly Black", "West Long Branch", 50);
+INSERT INTO authors VALUES (4, "Ken Follett", "Cardiff", 73);
+INSERT INTO authors VALUES (5, "Diana Gabaldon", "Williams", 70);
+INSERT INTO authors VALUES (6, "Madeline Miller", "Boston", 44);
+
+CREATE TABLE books (id INTEGER PRIMARY KEY, author_id INTEGER, title TEXT, year_released INTEGER);
+
+INSERT INTO books (author_id, title, year_released) VALUES (1, "A Court of Thorns and Roses", 2015);
+INSERT INTO books (author_id, title, year_released) VALUES (1, "A Court of Mist and Fury", 2016);
+INSERT INTO books (author_id, title, year_released) VALUES (1, "A Court of Wings and Ruin", 2017);
+INSERT INTO books (author_id, title, year_released) VALUES (2, "Harry Potter and the Sorcerer's Stone", 1997);
+INSERT INTO books (author_id, title, year_released) VALUES (2, "Harry Potter and the Chamber of Secrets", 1998);
+INSERT INTO books (author_id, title, year_released) VALUES (2, "Harry Potter and the Prisoner of Azkaban", 1999);
+INSERT INTO books (author_id, title, year_released) VALUES(2, "Harry Potter and the Goblet of Fire", 2000);
+INSERT INTO books (author_id, title, year_released) VALUES (3, "The Cruel Prince", 2018);
+INSERT INTO books (author_id, title, year_released) VALUES (3, "The Wicked King", 2019);
+INSERT INTO books (author_id, title, year_released) VALUES (3, "The Queen of Nothing", 2019);
+INSERT INTO books (author_id, title, year_released) VALUES(4, "The Pillars of the Earth", 1989);
+INSERT INTO books (author_id, title, year_released) VALUES (4, "World Without End", 2007);
+INSERT INTO books (author_id, title, year_released) VALUES (4, "A Column of Fire", 2017);
+INSERT INTO books (author_id, title, year_released) VALUES(5, "Outlander", 1991);
+INSERT INTO books (author_id, title, year_released) VALUES (5, "Dragonfly in Amber", 1992);
+INSERT INTO books (author_id, title, year_released) VALUES (5, "Voyager", 1993);
+INSERT INTO books (author_id, title, year_released) VALUES (5, "Drums of Autumn", 1996);
+INSERT INTO books (author_id, title, year_released) VALUES (6, "The Song of Achilles", 2011);
+INSERT INTO books (author_id, title, year_released) VALUES (6, "Galatea", 2013);
+INSERT INTO books (author_id, title, year_released) VALUES (6, "Circe", 2018);
+
+/*creating a cohesive table showing authors and the titles of the books they have written*/
+SELECT authors.fullname, books.title FROM authors
+JOIN books
+ON authors.id = books.author_id;
