@@ -25,7 +25,6 @@ WHERE price IN(SELECT MIN(price) FROM BIT_DB.JanSales);
 SELECT Product, SUM(quantity) * price AS revenue FROM BIT_DB.JanSales 
 GROUP BY Product;
 
-
 --Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
 SELECT Product, SUM(Quantity), SUM (Quantity) * price AS revenue FROM BIT_DB.FebSales 
 WHERE location = '548 Lincoln St, Seattle, WA 98101'
@@ -42,3 +41,34 @@ SELECT distinct Product, SUM(quantity)
 FROM BIT_DB.FebSales
 WHERE location like '%Los Angeles%'
 GROUP BY Product;
+
+--Which locations in New York received at least 3 orders in January, and how many orders did they each receive? (Hint: use HAVING).
+SELECT distinct location, COUNT(orderID)
+FROM BIT_DB.JanSales
+WHERE location LIKE '%NY%'
+GROUP BY location
+HAVING COUNT(orderID) >=3;
+
+--How many of each type of headphone were sold in February?
+SELECT distinct Product, SUM(Quantity)
+FROM BIT_DB.FebSales
+WHERE Product LIKE '%headphones%'
+GROUP BY product;
+
+--What was the average amount spent per account in February? (Hints: For this question, we want the average amount spent / number of accounts, not the amount spent by each account. To multiply, you can use the * symbol, and to divide, you can use the / symbol.)
+SELECT SUM(price*Quantity)/COUNT(customers.acctnum) AS 'avg/acct'
+FROM BIT_DB.FebSales feb
+LEFT JOIN BIT_DB.customers customers
+ON feb.orderID = customers.order_id;
+
+--What was the average quantity of products purchased per account in February? (Hint: just like question 3, we want the overall average, not the average for each account individually).
+SELECT SUM(Quantity)/COUNT(customers.acctnum) AS 'avgquan/acct'
+FROM BIT_DB.FebSales feb
+LEFT JOIN BIT_DB.customers customers
+ON feb.orderID = customers.order_id;
+
+--Which product brought in the most revenue in January and how much revenue did it bring in total?
+SELECT Product, SUM(quantity*price) AS 'totalrev'
+FROM BIT_DB.JanSales
+GROUP BY Product
+ORDER BY totalrev DESC LIMIT 1;
