@@ -1,0 +1,41 @@
+--In this SQL, I created a table with Spotify's Top 50 and analyzed the data.
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+--Finding top 10 most popular songs with high dancability
+SELECT track_name, artist_name, popularity FROM BIT_DB.Spotifydata
+WHERE danceability >0.5 AND popularity >85
+GROUP BY popularity LIMIT 10;
+
+--Finding the average duration, loudness, and liveness of the top 10 most popular songs
+SELECT AVG(duration_ms/1000) AS seconds, AVG(loudness) FROM BIT_DB.Spotifydata
+LIMIT 1-10;
+
+--Using a CTE, I calculated the average popularity of top artists and determined the artists with a popularity equal to or greater than 90
+WITH avg_pop_CTE AS (
+SELECT s.artist_name, AVG(s.popularity) AS av_pop
+FROM Spotifydata s
+GROUP BY s.artist_name
+)
+
+SELECT artist_name, av_pop, 'Top Star' AS tag
+FROM avg_pop_CTE
+WHERE av_pop>=90;
